@@ -58,6 +58,10 @@ public:
         
         sort(matchsticks.begin(),matchsticks.end(),greater<int>());
         
+        if(matchsticks[0]>target)
+            return false;
+        else
+        
         return dfs(matchsticks,target,sides,0);
         
         
