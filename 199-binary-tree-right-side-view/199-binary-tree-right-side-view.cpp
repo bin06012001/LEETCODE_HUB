@@ -11,30 +11,57 @@
  */
 class Solution {
 public:
-    vector<int> rightSideView(TreeNode* root) {
-         if(!root) {
-            return {};
+    
+    
+    
+    void right(TreeNode* root,vector<int>&vec,int level)
+    {
+        
+        if(root==NULL)
+            return;
+        
+        if(level==vec.size())
+        {
+            vec.push_back(root->val);
+            //maxlevel=level;
         }
-        vector<int> v; //store values of nodes in the rightmost
-        queue<TreeNode*> Q; //store node type values in queue 
-        Q.push(root); //push root
-        while(!Q.empty()) { //repeat steps until queue is not empty
-            
-            int size = Q.size();  // current size of queue
-            for(int i = 0; i < size; i++) {
-              TreeNode* t = Q.front(); //declare a temp node and put front node of queue
-                Q.pop(); 
-                if(i==size-1) {   //if node is rightmost 
-                    v.push_back(t->val); //push the value of rightmost node into vector
-                }
-                if(t->left) {   //if temp->left != NULL then push into queue
-                    Q.push(t->left);
-                }
-                if(t->right) { //if temp->right != NULL then push into queue
-                    Q.push(t->right);
-                }
-            }  
-        }
-        return v;
+        
+         right(root->right,vec,level+1);
+         right(root->left,vec,level+1);
     }
+    
+    vector<int> rightSideView(TreeNode* root) {
+        
+        vector<int> vec;
+        
+        right(root,vec,0);
+        
+        return vec;
+        
+    }
+    
+    
+   /* int maxlevel=0;
+void rightView(TreeNode* root,vector<int>&v,int level){
+if(root==NULL)return ;
+
+    if(maxlevel<level){
+        v.push_back(root->val);
+        maxlevel = level;
+    }
+    rightView(root->right,v,level+1);
+    rightView(root->left,v,level+1);
+}
+vector<int> rightSideView(TreeNode* root) {
+    vector<int>v;
+    
+    rightView(root,v,1);
+    
+    return v;
+}*/
 };
+
+//if(maxlevel<level){
+  //      v.push_back(root->val);
+    //    maxlevel = level;
+    //}
