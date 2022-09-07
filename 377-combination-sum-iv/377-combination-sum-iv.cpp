@@ -1,17 +1,27 @@
 class Solution {
 public:
-    int combinationSum4(vector<int>& nums, int target) {
+    
+    int solve(vector<int>& nums, int tar, vector<int>& dp)
+    {
+        if(tar<0)return 0;
+        if(tar==0)return 1;
         
-        vector<unsigned int> result(target + 1);
-        result[0] = 1;
-        for (int i = 1; i <= target; ++i) {
-            for (int x : nums) {
-                if (i >= x) result[i] += result[i - x];
-            }
+        if(dp[tar]!=-1)
+            return dp[tar];
+        
+        int ans=0;
+        for(int i=0;i<nums.size();i++)
+        {
+            ans+=solve(nums,tar-nums[i],dp);
         }
+        dp[tar]=ans;
+        return dp[tar];
+    }
+    
+    int combinationSum4(vector<int>& nums, int tar) {
         
-        return result[target]; 
-        
+        vector<int> dp(tar+1,-1);
+        return solve(nums,tar,dp);
         
     }
 };
