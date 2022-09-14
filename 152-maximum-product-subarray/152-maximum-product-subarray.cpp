@@ -1,22 +1,20 @@
 class Solution {
 public:
-    int maxProduct(vector<int>& nums) {
-       int ans = nums[0];
-    int dpMin = nums[0];  // min so far
-    int dpMax = nums[0];  // max so far
-    for (int i = 1; i < nums.size(); ++i) {
-      const int num = nums[i];
-      const int prevMin = dpMin;  // dpMin[i - 1]
-      const int prevMax = dpMax;  // dpMax[i - 1]
-      if (num < 0) {
-        dpMin = min(prevMax * num, num);
-        dpMax = max(prevMin * num, num);
-      } else {
-        dpMin = min(prevMin * num, num);
-        dpMax = max(prevMax * num, num);
-      }
-      ans = max(ans, dpMax);
-    }
-    return ans; 
+    int maxProduct(vector<int>& arr) {
+     int ans=arr[0],maxa=ans,mina=ans;
+	    int n=arr.size();
+        
+	    for(int i=1;i<n;i++)
+	    {
+	        if(arr[i]<0)
+	        swap(mina,maxa);
+	        
+	        maxa=max(arr[i],maxa*arr[i]);
+	        mina=min(arr[i],mina*arr[i]);
+	        
+	        ans=max(ans,maxa);
+	    }
+	    
+	    return ans;
     }
 };
