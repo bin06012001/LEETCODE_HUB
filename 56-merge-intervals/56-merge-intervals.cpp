@@ -8,7 +8,7 @@ public:
         
         sort(intervals.begin(),intervals.end());
         vector<int> temp=intervals[0];
-        
+        cout<<temp[1];
         for(auto it:intervals)
         {
             if(it[0]<=temp[1])
